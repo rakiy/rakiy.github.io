@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>旮旯</title>
+  
+  <subtitle>落灰的地方</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://del.pub/"/>
+  <updated>2020-03-08T01:26:59.000Z</updated>
+  <id>https://del.pub/</id>
+  
+  <author>
+    <name>Alex Xu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TPLINK WN725N 在黑苹果下的驱动</title>
+    <link href="https://del.pub/post/tp-wn725v2.html"/>
+    <id>https://del.pub/post/tp-wn725v2.html</id>
+    <published>2020-03-08T01:26:59.000Z</published>
+    <updated>2020-03-08T01:26:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="识别"><a href="#识别" class="headerlink" title="识别"></a>识别</h3><p>该USB无线网卡，芯片是 realtek 8188eu，可以直接用RT驱动激活。</p><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载 <a href="https://github.com/chris1111/Wireless-USB-Adapter-Clover" target="_blank" rel="noopener">Wireless-USB-Adapter-Clover</a></p><p>然后进行安装，一路下一步，安装完，他的默认安装路径是</p><pre><code>/EFI/CLOVER/kexts/Other/RtWlanU1827.kext/EFI/CLOVER/kexts/Other/RtWlanU.kext/Library/Applications Support/WLAN /Library/LaunchAgents/Wlan.Software.plist /Library/LaunchDaemons/Wlan.SoftwareDaemon.plist</code></pre><p>这时候要是你装的是CLOVER，那么直接重启就好了，如果是OC，再来下一步</p><h3 id="OC设置"><a href="#OC设置" class="headerlink" title="OC设置"></a>OC设置</h3><p>OC的话，要挂载EFI分区，把这俩文件从/EFI/CLOVER那里拿出来…放到/EFI/OC/kext下面去<br>然后在OC的config.plist 中的 Kenrel-Add 下面放在后面加载一下…</p><p>RtWlanU1827.kext / RtWlanU.kext  2个都要加载</p><h3 id="换图标"><a href="#换图标" class="headerlink" title="换图标"></a>换图标</h3><p>装好了，但是图标太丑怎么办，嗯，换之，其实Wireless-USB-Adapter-Clover项目本身不包含驱动，他的本体只是ICON，嗯，在relase中下载的是图标(惊不惊喜？)他的文件下载在在RELEASE包上面的链接，所以下载好之后，里面是包含2套图标的</p><p>打开(其实文件路径在上面的那个/Library/LaunchAgents/Wlan.Software.plist 文件中，用XCODE打开就可以看到)</p><pre><code>/Library/Application Support/WLAN/StatusBarApp.app/Contents/Resources</code></pre><p>嗯，就在里面，想怎么替换都行</p><h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><p>就在上面的资源文件夹里，找到默认的English.lproj文件夹打开，把里面的Localizable.strings对应的英文改成中文保存。</p><p>重启，就可以了…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;识别&quot;&gt;&lt;a href=&quot;#识别&quot; class=&quot;headerlink&quot; title=&quot;识别&quot;&gt;&lt;/a&gt;识别&lt;/h3&gt;&lt;p&gt;该USB无线网卡，芯片是 realtek 8188eu，可以直接用RT驱动激活。&lt;/p&gt;
+&lt;h3 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="黑苹果" scheme="https://del.pub/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
+    
+      <category term="TL-WN725NV2" scheme="https://del.pub/tags/TL-WN725NV2/"/>
+    
+      <category term="TPLINK" scheme="https://del.pub/tags/TPLINK/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黑苹果/微星B250M-E/10.15/EFI</title>
+    <link href="https://del.pub/post/msi_b250_oc_efi.html"/>
+    <id>https://del.pub/post/msi_b250_oc_efi.html</id>
+    <published>2019-11-27T01:26:59.000Z</published>
+    <updated>2019-11-27T01:26:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>自己用的黑苹果EFI,会一直更新到这个机器不用了为止吧…</p><p>GITHUB地址: <a href="https://github.com/rakiy/Hackintosh_MSI_B250M_EFI" target="_blank" rel="noopener">https://github.com/rakiy/Hackintosh_MSI_B250M_EFI</a></p><h3 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h3><ol><li>CPU: I5-6500 </li><li>内存：金士顿 DDR4 2400 8g 普条</li><li>显卡：HD530(集显)</li><li>主板：<a href="https://cn.msi.com/Motherboard/B250M-E," target="_blank" rel="noopener" title="官网链接">微星B250M-E</a></li><li>声卡：ALC887(实际上探测为 Realtek ALC888B (0x0887) )，仿冒ID为40</li><li>硬盘: 雷克沙512G SSD M.2 2280(需升级最新版本BIOS才可识别), 西数1T硬盘</li><li>键盘: 达尔优DK100</li><li>鼠标: DELL MS 116 (19块一个的那种)</li><li>网卡：板载 RTL8111H / TP-LINK TL-WN725N V2 </li></ol><a id="more"></a><h3 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h3><ol><li>10.15.1 除了快捷键都应该算是OK了</li><li>SSD已内置，网卡也已内置</li><li>4K硬解也已OK</li><li>声卡仿冒成功，基本完美识别，可以识别前后也可以识别显示器的HDMI</li><li>原生电源管理(节能5项)</li><li>USB电源管理</li><li>加入VirtualSMC的CPU温度传感器，istatus显示正常 (2019-11-25)</li></ol><h3 id="系统补丁"><a href="#系统补丁" class="headerlink" title="系统补丁"></a>系统补丁</h3><ol><li>lilu.kext   1.3.9 </li><li>VirtualSMC.kext  1.0.9 </li><li>WhateverGreen.kext 1.3.4</li><li>AppleALC.kext   1.4.3</li><li>RealtekRTL8111.kext  2.2.2</li><li>USBPorts.kext  自己生成</li><li>USBPower.kext  自己生成</li></ol><h3 id="DSDT"><a href="#DSDT" class="headerlink" title="DSDT"></a>DSDT</h3><ol><li>SSDT-no-EC.aml   禁用ECO</li><li>SSDT-PLUG-_PR.CPU0.aml  原生电源管理</li></ol><h3 id="需要自己动手的"><a href="#需要自己动手的" class="headerlink" title="需要自己动手的"></a>需要自己动手的</h3><ol><li>因为原生不支持nvram所以需要工具生成，下载完EFI之后还需要用 LogoutHook来生成nvram，不然无法修改启动项，方法请阅读:<a href="https://blog.xjn819.com/?p=543" target="_blank" rel="noopener">https://blog.xjn819.com/?p=543</a> 3.1 这一节，就2句命令，直接照作即可。</li><li>暂时没有了</li></ol><h3 id="非常重要"><a href="#非常重要" class="headerlink" title="非常重要"></a>非常重要</h3><ol><li>本EFI已经在BIOS关闭了Fast Boot / CFG Lock / VT-d / CSM，请配合食用，<br>（若BIOS里没有CFG LOCK，请升级一下<a href="https://cn.msi.com/Motherboard/support/B250M-E" target="_blank" rel="noopener">https://cn.msi.com/Motherboard/support/B250M-E</a></li></ol><p>**   !!! 刷BIOS有风险，万万不可断电</p><ol start="2"><li>如果不想升级BIOS，可以阅读<a href="https://blog.xjn819.com/?p=543" target="_blank" rel="noopener">https://blog.xjn819.com/?p=543</a>此文中第2部分CONFIG.PLIST中红字部分即可解决</li></ol><h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h3><ol><li>HD530的睡眠叫不醒问题！！这个暂时无法解决</li><li>一系列的快捷键神马的，我自己用不到就没有加，请自行添加</li></ol><h3 id="其它说明"><a href="#其它说明" class="headerlink" title="其它说明"></a>其它说明</h3><ol><li>本EFI只适用微星B250M-E，同型号的B250M-F / B250M PRO (包括VHD所有) / B250M NANO 都需要单独仿冒声卡，其它没有什么问题</li><li>因为是6代U，所以仿冒的机型为 IMAC17,1，如果修改该值，请配合修改 仿冒的显卡和声卡ID</li><li>因为在config.plist中设置了交换command和alt,所以呼出OC菜单为 win+r</li><li>其它想好再说</li></ol><h3 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h3><ol><li><a href="https://bbs.pcbeta.com," target="_blank" rel="noopener" title="国内黑苹果基地">远景论坛</a></li><li><a href="https://blog.daliansky.net" target="_blank" rel="noopener">黑果小兵</a></li><li><a href="https://blog.xjn819.com" target="_blank" rel="noopener">XJN</a></li><li><a href="https://github.com/daliansky/OC-little" target="_blank" rel="noopener">宪武</a></li><li><a href="https://github.com/acidanthera/OpenCorePkg" target="_blank" rel="noopener">OPENCORE</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自己用的黑苹果EFI,会一直更新到这个机器不用了为止吧…&lt;/p&gt;
+&lt;p&gt;GITHUB地址: &lt;a href=&quot;https://github.com/rakiy/Hackintosh_MSI_B250M_EFI&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rakiy/Hackintosh_MSI_B250M_EFI&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;机器配置&quot;&gt;&lt;a href=&quot;#机器配置&quot; class=&quot;headerlink&quot; title=&quot;机器配置&quot;&gt;&lt;/a&gt;机器配置&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;CPU: I5-6500 &lt;/li&gt;
+&lt;li&gt;内存：金士顿 DDR4 2400 8g 普条&lt;/li&gt;
+&lt;li&gt;显卡：HD530(集显)&lt;/li&gt;
+&lt;li&gt;主板：&lt;a href=&quot;https://cn.msi.com/Motherboard/B250M-E,&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;官网链接&quot;&gt;微星B250M-E&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;声卡：ALC887(实际上探测为 Realtek ALC888B (0x0887) )，仿冒ID为40&lt;/li&gt;
+&lt;li&gt;硬盘: 雷克沙512G SSD M.2 2280(需升级最新版本BIOS才可识别), 西数1T硬盘&lt;/li&gt;
+&lt;li&gt;键盘: 达尔优DK100&lt;/li&gt;
+&lt;li&gt;鼠标: DELL MS 116 (19块一个的那种)&lt;/li&gt;
+&lt;li&gt;网卡：板载 RTL8111H / TP-LINK TL-WN725N V2 &lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="黑苹果" scheme="https://del.pub/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
+    
+      <category term="微星" scheme="https://del.pub/tags/%E5%BE%AE%E6%98%9F/"/>
+    
+      <category term="B250" scheme="https://del.pub/tags/B250/"/>
+    
+      <category term="OpenCore" scheme="https://del.pub/tags/OpenCore/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用DNS盾让BLOG一直在线</title>
+    <link href="https://del.pub/post/dnsdun.html"/>
+    <id>https://del.pub/post/dnsdun.html</id>
+    <published>2019-11-21T03:43:01.000Z</published>
+    <updated>2019-11-21T03:43:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>博客用的CODING.NET虽然给了腾讯云新加坡节点，</p><p>但是，昨晚上又双叒叕跪了，问了问CODING客服，是有人发非法信息被牵连了…</p><p>好吧，昨晚上一堆BLOG又跪了，突然想到HEXO是可以同步到多GIT的，</p><p>可以在解析的时候监控一下如果coding又跪了，就自动切换到github上去…</p><p>解决方法有2种</p><a id="more"></a><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><h4 id="自己写"><a href="#自己写" class="headerlink" title="自己写"></a>自己写</h4><p>自己写监控脚本，然后用API切换解析，这个适用于各种开放了API接口的域名解析商</p><p>比如：<a href="https://help.aliyun.com/document_detail/29739.html" target="_blank" rel="noopener">阿里云</a> ，<a href="https://cloud.tencent.com/document/product/302" target="_blank" rel="noopener">腾讯云</a>  等等，其中阿里云好评，给出了JAVA、PYTHO和PHP的SDK</p><h4 id="DNS盾"><a href="#DNS盾" class="headerlink" title="DNS盾"></a>DNS盾</h4><p>其实很多家都提供类似的服务，不过只有DNS盾的最便宜，</p><p>只要充值1块，花1毛钱发一条短信…还有9分嗯，也不知道干嘛…</p><p>利用<a href="https://dnsdun.com" target="_blank" rel="noopener">DNSDUN</a>提供的解析监控服务，来做自动切换</p><p>PS. 这里需要coding.net和GITHUB都要绑定了你的域名</p><p>先建立一个CNAME，将自己的域名解析到 coding.net</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191121/jiexi.png" class="full-image lazy" alt="解析方法" title="解析方法" /><p>然后再添加一个监控，选定HTTP状态即可，不需要监控内容，然后CNAME到你GITHUB的域名</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191121/jiankong.png" class="full-image lazy" alt="解析方法" title="解析方法" /><p>添加成功后，右边监控状态是绿色的，说明是正常，红色说明不正常，</p><p>如果是红色，一般可以看到域名的解析值已经变成了GITHUB的了,</p><p>等coding恢复正常的时候就可以跳回来了….</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;博客用的CODING.NET虽然给了腾讯云新加坡节点，&lt;/p&gt;
+&lt;p&gt;但是，昨晚上又双叒叕跪了，问了问CODING客服，是有人发非法信息被牵连了…&lt;/p&gt;
+&lt;p&gt;好吧，昨晚上一堆BLOG又跪了，突然想到HEXO是可以同步到多GIT的，&lt;/p&gt;
+&lt;p&gt;可以在解析的时候监控一下如果coding又跪了，就自动切换到github上去…&lt;/p&gt;
+&lt;p&gt;解决方法有2种&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="DNS盾" scheme="https://del.pub/tags/DNS%E7%9B%BE/"/>
+    
+      <category term="DNS监控" scheme="https://del.pub/tags/DNS%E7%9B%91%E6%8E%A7/"/>
+    
+      <category term="DNS" scheme="https://del.pub/tags/DNS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黑苹果M.2接口SSD由外置改为内置</title>
+    <link href="https://del.pub/post/innie.html"/>
+    <id>https://del.pub/post/innie.html</id>
+    <published>2019-11-15T04:44:02.000Z</published>
+    <updated>2019-11-15T04:44:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>有2个，一个是改DSDT，今天是另外一个，其实我搜了很久，都是建议改DSDT的，心累，最后在百度帖吧看到了一个装LILU插件的，可是却并没有附件(搬帖不全)</p><p>知道插件名字叫 innie.kext，是LILU.KEXT的插件，打开GITHUB去搜，并没有 innie的项目，再看远景，有一个帖子给了附件，是1.09的一个DEBUG版本</p><p>果断谷歌，最后在 <a href="https://forums.macrumors.com/threads/innie-a-fix-for-pci-drives-seen-as-external.2136229/" target="_blank" rel="noopener">macrumors</a>上找到了这个名为 innie的LILU插件</p><p>也到找到其最新版本 1.2.0还是个RELEASE版本，这个也适用于白苹果</p><a id="more"></a><h3 id="对于白苹果"><a href="#对于白苹果" class="headerlink" title="对于白苹果"></a>对于白苹果</h3><blockquote><ol><li><p>关闭SLP</p></li><li><p>下载<a href="https://github.com/acidanthera/Lilu/releases" target="_blank" rel="noopener">lilu.kext</a></p></li><li><p>打开LILU.KEXT包，在contents里建一个plugin，然后把 innie.kext扔进去</p></li><li><p>把lilu.kext扔进/Library/Extensions.</p></li><li><p>然后修复S/L/E权限，也就是：</p><p>sudo chmod -R 755 /Library/Extensions/Lilu.kext<br>sudo chown -R root:wheel /Library/Extensions/Lilu.kext<br>sudo touch /Library/Extensions<br>sudo kextcache -update-volume /</p></li><li><p>重启</p></li></ol></blockquote><h3 id="对于黑苹果"><a href="#对于黑苹果" class="headerlink" title="对于黑苹果"></a>对于黑苹果</h3><blockquote><ol><li>挂载EFI分区，打开CLOVER/OC等的KEXT目录</li><li>打开LILU.KEXT包，在contents里建一个plugin，然后把 innie.kext扔进去</li><li>重启</li></ol></blockquote><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>我自己的 雷克沙500G NVME SSD 在显示外置的时候，写1G/S 读1.3G/S，改完之后 写1.5G/S，读1.8G/S,速度还是有所提升的。</p><h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><p><a href="https://pan.baidu.com/s/1X0__sUbb9gvKsmTQyxPQaA" target="_blank" rel="noopener">INNIE-1.2.0.ZIP</a>(提取码:bh3u)</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h3&gt;&lt;p&gt;有2个，一个是改DSDT，今天是另外一个，其实我搜了很久，都是建议改DSDT的，心累，最后在百度帖吧看到了一个装LILU插件的，可是却并没有附件(搬帖不全)&lt;/p&gt;
+&lt;p&gt;知道插件名字叫 innie.kext，是LILU.KEXT的插件，打开GITHUB去搜，并没有 innie的项目，再看远景，有一个帖子给了附件，是1.09的一个DEBUG版本&lt;/p&gt;
+&lt;p&gt;果断谷歌，最后在 &lt;a href=&quot;https://forums.macrumors.com/threads/innie-a-fix-for-pci-drives-seen-as-external.2136229/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;macrumors&lt;/a&gt;上找到了这个名为 innie的LILU插件&lt;/p&gt;
+&lt;p&gt;也到找到其最新版本 1.2.0还是个RELEASE版本，这个也适用于白苹果&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="折腾" scheme="https://del.pub/tags/%E6%8A%98%E8%85%BE/"/>
+    
+      <category term="黑苹果" scheme="https://del.pub/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LinuxQQ复活？</title>
+    <link href="https://del.pub/post/linuxqq.html"/>
+    <id>https://del.pub/post/linuxqq.html</id>
+    <published>2019-10-25T08:38:37.000Z</published>
+    <updated>2019-10-25T08:38:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191025/linuxqq.png" class="full-image lazy" alt="LinuxQQ" title="LinuxQQ" /><p>LinuxQQ又双叒叕来了，依稀记得上一次LINUXQQ还是2008年？</p><p>曾经在用UBUNTU的时候用过各种版本的QQ，包括这个不好用的版本</p><p>后来腾讯就把这个版本的QQ扔掉了，再也没有复活过</p><p>直到今天，又把他复活了…LINUXQQ 2.0.0 Beta</p><p>看到之后第一时间在我自己的 树莓派3b+(armv8 64位)上试了试..</p><p>先用deb包试了试，无法安装，又用.sh直接安装，安装是成功了，但是无法启动</p><p>嗯，之后再折腾…应该还没有适配树莓派的PI系统吧…</p><p>官方地址: <a href="https://im.qq.com/linuxqq" target="_blank" rel="noopener">https://im.qq.com/linuxqq</a></p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/images/loading.gif&quot; data-original=&quot;//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191025/linuxqq.png&quot; class=&quot;full-image lazy&quot; alt=&quot;LinuxQQ&quot; title=&quot;LinuxQQ&quot; /&gt;
+
+&lt;p&gt;LinuxQQ又双叒叕来了，依稀记得上一次LINUXQQ还是2008年？&lt;/p&gt;
+&lt;p&gt;曾经在用UBUNTU的时候用过各种版本的QQ，包括这个不好用的版本&lt;/p&gt;
+&lt;p&gt;后来腾讯就把这个版本的QQ扔掉了，再也没有复活过&lt;/p&gt;
+&lt;p&gt;直到今天，又把他复活了…LINUXQQ 2.0.0 Beta&lt;/p&gt;
+&lt;p&gt;看到之后第一时间在我自己的 树莓派3b+(armv8 64位)上试了试..&lt;/p&gt;
+&lt;p&gt;先用deb包试了试，无法安装，又用.sh直接安装，安装是成功了，但是无法启动&lt;/p&gt;
+&lt;p&gt;嗯，之后再折腾…应该还没有适配树莓派的PI系统吧…&lt;/p&gt;
+&lt;p&gt;官方地址: &lt;a href=&quot;https://im.qq.com/linuxqq&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://im.qq.com/linuxqq&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="腾讯" scheme="https://del.pub/tags/%E8%85%BE%E8%AE%AF/"/>
+    
+      <category term="qq" scheme="https://del.pub/tags/qq/"/>
+    
+      <category term="linux" scheme="https://del.pub/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人博客重启</title>
+    <link href="https://del.pub/post/newblog.html"/>
+    <id>https://del.pub/post/newblog.html</id>
+    <published>2019-10-20T17:43:51.000Z</published>
+    <updated>2019-10-20T17:43:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>嗯，重启一下BLOG，毕竟我个人还是喜欢码字的</p><p>之前的<a href="http://ysido.com" target="_blank" rel="noopener">ysido.com</a>是放在西数上的，</p><p>其实荒废了太久太久了，刚好注册到一个新的后缀 </p><p>.pub(<a href="https://wanwang.aliyun.com/" target="_blank" rel="noopener">阿里</a>注册17续费35，<a href="https://west.cn" target="_blank" rel="noopener">西数</a>注册9块续费35)，.PUB支持备案</p><p>现在对这种怪怪的后缀很是喜欢，个人还喜欢 .xyz域名，之前注册到还一次买了10年</p><p>之前一直用的TYPECHO，这次我也用下HEXO，然后放在<a href="https://coding.net" target="_blank" rel="noopener">CODING.NET</a>上</p><p>现在CODEING.NET用的是腾讯云的新加坡节点，几乎也不会跪了，觉得GITHUB慢的童鞋可以试一下？</p><p>嗯，就先这样吧，搬运了之前的BLOG上的几篇文章，主要是试github图床(似乎很给力？)</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;嗯，重启一下BLOG，毕竟我个人还是喜欢码字的&lt;/p&gt;
+&lt;p&gt;之前的&lt;a href=&quot;http://ysido.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ysido.com&lt;/a&gt;是放在西数上的，&lt;/p&gt;
+&lt;p&gt;其实荒废了太久太久了，刚好注册到一个新的后缀 &lt;/p&gt;
+&lt;p&gt;.pub(&lt;a href=&quot;https://wanwang.aliyun.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;阿里&lt;/a&gt;注册17续费35，&lt;a href=&quot;https://west.cn&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;西数&lt;/a&gt;注册9块续费35)，.PUB支持备案&lt;/p&gt;
+&lt;p&gt;现在对这种怪怪的后缀很是喜欢，个人还喜欢 .xyz域名，之前注册到还一次买了10年&lt;/p&gt;
+&lt;p&gt;之前一直用的TYPECHO，这次我也用下HEXO，然后放在&lt;a href=&quot;https://coding.net&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CODING.NET&lt;/a&gt;上&lt;/p&gt;
+&lt;p&gt;现在CODEING.NET用的是腾讯云的新加坡节点，几乎也不会跪了，觉得GITHUB慢的童鞋可以试一下？&lt;/p&gt;
+&lt;p&gt;嗯，就先这样吧，搬运了之前的BLOG上的几篇文章，主要是试github图床(似乎很给力？)&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="吐槽" scheme="https://del.pub/tags/%E5%90%90%E6%A7%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>七牛云附件上传 更新至 V1.3.1</title>
+    <link href="https://del.pub/post/qnupload.html"/>
+    <id>https://del.pub/post/qnupload.html</id>
+    <published>2016-11-28T09:00:00.000Z</published>
+    <updated>2016-11-28T09:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><p>百度网盘: <a href="http://pan.baidu.com/s/1nvEubBb" target="_blank" rel="noopener">http://pan.baidu.com/s/1nvEubBb</a></p><p>github: <a href="https://github.com/typecho-fans/plugins/tree/master/QNUpload" target="_blank" rel="noopener">https://github.com/typecho-fans/plugins/tree/master/QNUpload</a></p><p>感谢：<a href="http://www.doudou.me" target="_blank" rel="noopener">@兜兜</a>,<a href="http://t.qq.com/youtubefans" target="_blank" rel="noopener">@刘世杰</a>,<a href="http://t.qq.com/yushanggj" target="_blank" rel="noopener">@雨伤</a>,<a href="https://www.69dai.cn/" target="_blank" rel="noopener">@超人欧巴</a></p><a id="more"></a><p>升级时建议最好卸载旧插件然后再安装,提前备份一下SK,AK,域名,重新启用需要重传</p><h3 id="更新说明"><a href="#更新说明" class="headerlink" title="更新说明"></a>更新说明</h3><p>2016/12/12   </p><blockquote><p>修正后台域名正则判定，增加对ssl域名的支持</p></blockquote><p>2016-12-09</p><blockquote><p>后台添加选择bucket的位置选项,影响上传接口<br>后台添加域名必填的提示<br>修复后台返回文件不带路径的BUG</p></blockquote><p>2016-11-28  </p><blockquote><p>将所含七牛SDK升级至6.1.3,同时简化了上传方法<br>增加TE1.0的兼容性</p></blockquote><p>2013-12-26</p><blockquote><p>第1版本完成</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;下载地址&quot;&gt;&lt;a href=&quot;#下载地址&quot; class=&quot;headerlink&quot; title=&quot;下载地址&quot;&gt;&lt;/a&gt;下载地址&lt;/h3&gt;&lt;p&gt;百度网盘: &lt;a href=&quot;http://pan.baidu.com/s/1nvEubBb&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://pan.baidu.com/s/1nvEubBb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;github: &lt;a href=&quot;https://github.com/typecho-fans/plugins/tree/master/QNUpload&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/typecho-fans/plugins/tree/master/QNUpload&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;感谢：&lt;a href=&quot;http://www.doudou.me&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@兜兜&lt;/a&gt;,&lt;a href=&quot;http://t.qq.com/youtubefans&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@刘世杰&lt;/a&gt;,&lt;a href=&quot;http://t.qq.com/yushanggj&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@雨伤&lt;/a&gt;,&lt;a href=&quot;https://www.69dai.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@超人欧巴&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="typecho" scheme="https://del.pub/tags/typecho/"/>
+    
+      <category term="插件" scheme="https://del.pub/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+      <category term="plugin" scheme="https://del.pub/tags/plugin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CateFilter V1.1.1</title>
+    <link href="https://del.pub/post/catefilter.html"/>
+    <id>https://del.pub/post/catefilter.html</id>
+    <published>2016-11-28T08:45:00.000Z</published>
+    <updated>2016-11-28T08:45:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>历史版本</p><p>version 1.1.1 – 2017-03-22 修复使用插件后首页文章链接变成分类链接的BUG</p><p>version 1.1.0 – 2016.11.25 修复过滤分类时同时会过滤FEED的BUG</p><p>version 1.0.0 – 2013-12-22 实现功能</p></blockquote><p>下载地址：</p><p>github: <a href="https://github.com/typecho-fans/plugins/tree/master/CateFilter" target="_blank" rel="noopener">https://github.com/typecho-fans/plugins/tree/master/CateFilter</a></p><p>百度网盘: <a href="http://pan.baidu.com/s/1i5zE6C9" target="_blank" rel="noopener">http://pan.baidu.com/s/1i5zE6C9</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;历史版本&lt;/p&gt;
+&lt;p&gt;version 1.1.1 – 2017-03-22 修复使用插件后首页文章链接变成分类链接的BUG&lt;/p&gt;
+&lt;p&gt;version 1.1.0 – 2016.11.25 修复过滤分类时同时会过滤FEED的BUG&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+    
+    
+      <category term="typecho" scheme="https://del.pub/tags/typecho/"/>
+    
+      <category term="插件" scheme="https://del.pub/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+      <category term="plugin" scheme="https://del.pub/tags/plugin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>错觉 V2.0</title>
+    <link href="https://del.pub/post/Illusion-1.html"/>
+    <id>https://del.pub/post/Illusion-1.html</id>
+    <published>2014-02-09T17:51:00.000Z</published>
+    <updated>2014-02-09T17:51:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>错觉 V2.0 - 当前使用的一款主题,演示看当前</p><p>普通页移植自<a href="http://lofter.com" target="_blank" rel="noopener">LOFTER</a>，圣诞为自己改写</p><p>来自 <a href="http://www.ysido.com" target="_blank" rel="noopener">http://www.ysido.com</a></p><p>支持CHROME FIREFOX IE9+ [不要问我为何不支持IE678]</p><p>将圣诞和普通合2为1</p><p>支持特性：</p><p>1.内容页支持左右键翻页</p><p>2.点点读者墙</p><p>3.一键切换风格</p><p>4.内容页多MORE截取</p><p>5.其它请自行发掘</p><a id="more"></a><p>特别说明：</p><p>1.请至少保留一下版权，这是对作者最起码的尊重</p><p>2.本作品仅发布于百度网盘等免费网盘，如果你是从千军万马等收费网盘下载，那绝非本人所传</p><p>3.暂时未写comments.php，深度集成多说，必须使用多说评论…</p><p>另外说明</p><p>1.友情链接在页面上格式如下</p><pre><code class="html">&lt;li&gt;  &lt;a href=&quot;链接&quot; title=&quot;说明&quot; target=&quot;_blank&quot;&gt;    &lt;img src=&quot;图片&quot; alt=&quot;说明&quot; /&gt;&lt;em&gt;名称&lt;/em&gt;&lt;br&gt;显示地址  &lt;/a&gt;&lt;/li&gt;</code></pre><p>2.音乐请直接使用虾米即可</p><p>3.有问题请留言，其它地方看不到..</p><p>下载地址：<a href="http://pan.baidu.com/s/1qWrYq8c" target="_blank" rel="noopener">点击下载(百度网盘 304KB)</a> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;错觉 V2.0 - 当前使用的一款主题,演示看当前&lt;/p&gt;
+&lt;p&gt;普通页移植自&lt;a href=&quot;http://lofter.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;LOFTER&lt;/a&gt;，圣诞为自己改写&lt;/p&gt;
+&lt;p&gt;来自 &lt;a href=&quot;http://www.ysido.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.ysido.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;支持CHROME FIREFOX IE9+ [不要问我为何不支持IE678]&lt;/p&gt;
+&lt;p&gt;将圣诞和普通合2为1&lt;/p&gt;
+&lt;p&gt;支持特性：&lt;/p&gt;
+&lt;p&gt;1.内容页支持左右键翻页&lt;/p&gt;
+&lt;p&gt;2.点点读者墙&lt;/p&gt;
+&lt;p&gt;3.一键切换风格&lt;/p&gt;
+&lt;p&gt;4.内容页多MORE截取&lt;/p&gt;
+&lt;p&gt;5.其它请自行发掘&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="typecho" scheme="https://del.pub/tags/typecho/"/>
+    
+      <category term="主题" scheme="https://del.pub/tags/%E4%B8%BB%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——终篇</title>
+    <link href="https://del.pub/post/travel_yunnan-1.html"/>
+    <id>https://del.pub/post/travel_yunnan-1.html</id>
+    <published>2013-11-29T20:22:00.000Z</published>
+    <updated>2013-11-29T20:22:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>嗯，结尾了，有很多童鞋会问吃的如何，住的如何</p><a id="more"></a><h3 id="食"><a href="#食" class="headerlink" title="食"></a>食</h3><p>  除了古城未管饭外，其余都管饭了，每顿都不错</p><p>  早餐：一般宾馆管，自助餐，有牛奶豆浆，馒头，各种菜，不限量</p><p>  午餐：一般是有荤有素，味道一般，量却不少</p><p>  晚餐同午餐</p><h3 id="住"><a href="#住" class="headerlink" title="住"></a>住</h3><p>  一路过来都是4星或5星，除了楚雄住的很一般外，其余还是非常不错的</p><h3 id="行"><a href="#行" class="headerlink" title="行"></a>行</h3><p>  跟团很累哦，我这几天都是5点半就要起床了，6点半就要行动了…</p><h3 id="开销"><a href="#开销" class="headerlink" title="开销"></a>开销</h3><p>  这也是大家都关心的问题吧，我这么跑一趟，旅游费是多少呢？嗯，1500块，双飞5天6晚，昆明——大理——丽江，这就是价格了，景点的电瓶车钱要自理哦，虽然写着可选，但一般都是必选，时间太紧了</p><p>  有空的童鞋们可以去了，1500块，加上电瓶车，加上买水买玉买精油，我一共花掉了1000块哦，我们公司有花了不到500的同事哦…</p><p>  有想出去的童鞋们可以下决心出去了…1500，只要你别打着去边工作边赚钱玩的主意，就可以出发了…</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;嗯，结尾了，有很多童鞋会问吃的如何，住的如何&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——番外篇</title>
+    <link href="https://del.pub/post/travel_shop.html"/>
+    <id>https://del.pub/post/travel_shop.html</id>
+    <published>2013-11-29T20:12:00.000Z</published>
+    <updated>2013-11-29T20:12:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>嗯，所谓的番外篇，当然了，就是购物篇了</p><p>10月1日之后，不能强制购物了，这点体现还是很明显</p><p>我们的主要的导游，从不进景点，包括古城，都直接交给讲解员，或是直接自由活动</p><p>所以丽江之行，格外轻松，导游说的最多的话就是 不要购物，假货很多…</p><p>所以在购物点，虽然有购物，但导游并未强制，且未对未购买或买的少的人做出任何刁难行为…</p><p>这点让人感觉还不错</p><a id="more"></a><p>但是，依然按排了去购物，一共是4个地方，下方打分5星满，安全是指后期保障</p><p>PS.庆丰祥的普洱，只有七彩云南有哦，生茶357克的是220块，熟茶是180块，1公斤的龙凤呈祥是1100块的样子吧…</p><h3 id="购物点1-钰满天下"><a href="#购物点1-钰满天下" class="headerlink" title="购物点1-钰满天下"></a>购物点1-钰满天下</h3><p>这里主要出售的是 翡翠，黄龙玉，精油，所有产品开正规发票，并出具法律承认的质检报告，最便宜的翡翠是 90块，有手链，貔貅等，特价区有 90 180 280 480 680 880这一类，至于精油，有10ML和30ML，只粗粗的问了下，大约10ML的80多块，30ML的是180多，我有入了些精油香皂，1块24，5块100。黄龙玉的话，没细看了</p><p>购物环境：4星[导购偶尔有些粘人]　态度：5星　价位：4星[略贵]　安全：5星</p><h3 id="购物点2-七彩云南"><a href="#购物点2-七彩云南" class="headerlink" title="购物点2-七彩云南"></a>购物点2-七彩云南</h3><p>这里比较出名了，几乎出售所有云南的特产，购物环境轻松，几乎和家中的大超市环境相当，物品并不贵，这里主要卖的是庆丰祥的普洱和其它特产</p><p>购物环境： 5星[非常轻松]　态度：5星　价格：4星[略贵]　安全：5星</p><h3 id="购物点3-寸发标银饰"><a href="#购物点3-寸发标银饰" class="headerlink" title="购物点3-寸发标银饰"></a>购物点3-寸发标银饰</h3><p>这里的东西，做工很好，但也出奇的怪，市面白银大约是12-15每克，这里面大约是26-36的样子，主要是卖工艺了，不过这家的销售手段确实不敢太过于恭维，导购跟鬼魂一样的跟着你，走到哪里都跟着，然后一不小心转头，会被吓到哦….</p><p>购物环境： 3星[压抑]　态度：4星　价格：5星[很贵]　安全性：4星</p><h3 id="购物点4-花卉市场"><a href="#购物点4-花卉市场" class="headerlink" title="购物点4-花卉市场"></a>购物点4-花卉市场</h3><p>这里是最后一站，就是一个市场了，价格相比较而言还是便宜，主要出售特产，黄龙玉，干花，精油等，精油和黄龙玉还是那么贵，不讨论，这里的咖啡，吃的还是不错的，卖干花的有点小粘，干花有4种，1.随温度变化而变色的，这类最低的35块，2.夜光的，这类最低的似乎是40多，3.喷水就开花的，这类最低20多，4.带香的，这类最低10几块，我有入一支18块的蓝色妖姬，就是带香的…不过到市场最后面有成束的干花，大花是50-80，很大一束哦，这个是蛮划算的，据说可以放8年…本文配的图就是成束的干花，70块，玫瑰，香水百合</p><p>购物环境： 4星[一般，个别馆粘人]　态度：4星　价格：3星[相对便宜]　安全性：4星</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;嗯，所谓的番外篇，当然了，就是购物篇了&lt;/p&gt;
+&lt;p&gt;10月1日之后，不能强制购物了，这点体现还是很明显&lt;/p&gt;
+&lt;p&gt;我们的主要的导游，从不进景点，包括古城，都直接交给讲解员，或是直接自由活动&lt;/p&gt;
+&lt;p&gt;所以丽江之行，格外轻松，导游说的最多的话就是 不要购物，假货很多…&lt;/p&gt;
+&lt;p&gt;所以在购物点，虽然有购物，但导游并未强制，且未对未购买或买的少的人做出任何刁难行为…&lt;/p&gt;
+&lt;p&gt;这点让人感觉还不错&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——昆明篇</title>
+    <link href="https://del.pub/post/travel_kunming.html"/>
+    <id>https://del.pub/post/travel_kunming.html</id>
+    <published>2013-11-28T19:42:00.000Z</published>
+    <updated>2013-11-28T19:42:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>很奇葩的线路，第1天到的昆明，却在最后一天来昆明景点</p><p>今天的景点，就是著名的—石林</p><p>经常吸烟的童鞋肯定是很熟悉了，石林烟的封面就是今天的石林</p><p>石林的这种地形，被称为 喀斯特地形，来源似乎是前南斯拉夫，自行百度一下…</p><p>此处还是《新西游记》拍摄地点，但是吧，张纪中版本，你懂的…</p><p>这边主要住着的民族是 彝族，男的叫 阿黑  女的叫 阿诗玛…</p><a id="more"></a><h3 id="石林入口"><a href="#石林入口" class="headerlink" title="石林入口"></a>石林入口</h3><p>标志性地点，这个地方没见过的，请面壁</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/sl.jpg" class="full-image lazy" alt="石林" title="石林" /><h3 id="恩来湖"><a href="#恩来湖" class="headerlink" title="恩来湖"></a>恩来湖</h3><p>入口处的 “恩来湖”，恩来2字，不用说，大家也应该知道是谁了吧，这是人工湖</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/elh.jpg" class="full-image lazy" alt="恩来湖" title="恩来湖" /><h3 id="大鹏鸟"><a href="#大鹏鸟" class="headerlink" title="大鹏鸟"></a>大鹏鸟</h3><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/dpn.jpg" class="full-image lazy" alt="据说像一只大鹏" title="据说像一只大鹏" /><h3 id="天然过道"><a href="#天然过道" class="headerlink" title="天然过道"></a>天然过道</h3><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/gd.jpg" class="full-image lazy" alt="险峻的过道" title="险峻的过道" /><h3 id="朱德的题字"><a href="#朱德的题字" class="headerlink" title="朱德的题字"></a>朱德的题字</h3><p>群峰壁立，千嶂叠翠</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/zlztz.jpg" class="full-image lazy" alt="群峰壁立，千嶂叠翠" title="群峰壁立，千嶂叠翠" /><h3 id="大三弦"><a href="#大三弦" class="headerlink" title="大三弦"></a>大三弦</h3><p>未婚的阿诗玛不能乱跳的哦，只能和自己喜欢的人对跳</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/dsx1.jpg" class="full-image lazy" alt="大三弦1" title="大三弦1" /><h3 id="阿诗玛"><a href="#阿诗玛" class="headerlink" title="阿诗玛"></a>阿诗玛</h3><p>石林最著名的石头了</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/asm.jpg" class="full-image lazy" alt="阿诗玛" title="阿诗玛" /><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/asmjs.jpg" class="full-image lazy" alt="阿诗玛介绍" title="阿诗玛介绍" /><h3 id="石林随拍"><a href="#石林随拍" class="headerlink" title="石林随拍"></a>石林随拍</h3><p>导游说，请自行想像</p><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/sl1.jpg" class="full-image lazy" alt="石林随拍" title="石林随拍" /><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/sl2.jpg" class="full-image lazy" alt="石林随拍" title="石林随拍" /><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/sl3.jpg" class="full-image lazy" alt="石林随拍" title="石林随拍" /><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/sl4.jpg" class="full-image lazy" alt="石林随拍" title="石林随拍" /><img src="/images/loading.gif" data-original="//cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191020/sl5.jpg" class="full-image lazy" alt="石林随拍" title="石林随拍" />]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很奇葩的线路，第1天到的昆明，却在最后一天来昆明景点&lt;/p&gt;
+&lt;p&gt;今天的景点，就是著名的—石林&lt;/p&gt;
+&lt;p&gt;经常吸烟的童鞋肯定是很熟悉了，石林烟的封面就是今天的石林&lt;/p&gt;
+&lt;p&gt;石林的这种地形，被称为 喀斯特地形，来源似乎是前南斯拉夫，自行百度一下…&lt;/p&gt;
+&lt;p&gt;此处还是《新西游记》拍摄地点，但是吧，张纪中版本，你懂的…&lt;/p&gt;
+&lt;p&gt;这边主要住着的民族是 彝族，男的叫 阿黑  女的叫 阿诗玛…&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——大理篇[下]</title>
+    <link href="https://del.pub/post/travel_dali2.html"/>
+    <id>https://del.pub/post/travel_dali2.html</id>
+    <published>2013-11-25T19:17:00.000Z</published>
+    <updated>2013-11-25T19:17:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>嗯，第4天了吧，又要杀回大理了…</p><p>这行程安排的，先从昆明杀到丽江，再杀回来</p><p>所以就有了2次游大理，不过在游大理之前，先去了下 观音峡</p><p>原本是安排在第1天下午的，因为车程太长，当天坐了近8个小时的大巴</p><p>直到晚上19点之后才到丽江，所以将观音峡移至今天早晨</p><p>这里景点一般，最后的峡谷瀑布因为前一天比较累的原因，我并没有上去，而是和另一位同事一起选择了码头边上的一家奶茶店，静静的等其它人回来。</p><a id="more"></a><p>随手所拍：</p><p>观音峡的湖，忘了名字了</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/gyx.jpg" class="full-image lazy" /><p>东巴像形文字，据说只有1400个</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/dbwz.jpg" class="full-image lazy" /><p>马帮交换物品的街道，以前2边都是客栈的说，有木有龙门镖局街道的感觉？</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/mbjd.jpg" class="full-image lazy" /><p>七和税局，以前的土司就是在这里向马帮收税的，听讲解说，大约就是 8块普洱，1块为税</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/qhsj.jpg" class="full-image lazy" /><p>烤烟房，这里是制作香烟的地方，但是呢，这是用牛粪建成的，吸烟的筒子们注意啦…</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/kyf.jpg" class="full-image lazy" /><p>另外注意哦，这里有3处，是那种免费拍照，做钥匙扣的，</p><p>1.通关文牒  在入口处，拍照不要钱和小照片不要钱，但是出来之后，大照片是要钱的哦，10块，然后再往外走，一个土司装扮的人，要帮你把你的名字，用东巴文写上去，然后过塑，这个也是要收钱的，5块….</p><p>2.那个东巴族图腾，八卦青蛙，据说 摸 四肢是 健康 肚子是财运 尾巴是桃花运 头是官运，这个一样，也是小照片和钥匙扣不要钱，大照片1张15块</p><p>3.还有一处在拍，同2</p><p>嗯，这个完了就再次杀回大理，目的地是 大理的洱海，观看鱼鹰表演</p><p>泛舟洱海</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/eh.jpg" class="full-image lazy" /><p>鱼鹰下海</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/yyxh.jpg" class="full-image lazy" /><p>中间的表演–白族迎宾舞</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/bzybw.jpg" class="full-image lazy" /><p>白族民居参观<br>照壁–说明这家人是作官的</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/zb.jpg" class="full-image lazy" /><p>大理三道茶 1苦 2甜 3回味</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/sdc.jpg" class="full-image lazy" /><p>至此，结束了大理之行，前往楚雄，在楚雄，听到了之前调侃很久的云南民歌《老司机等等我》，有没听过的童鞋们可以一听哦</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;嗯，第4天了吧，又要杀回大理了…&lt;/p&gt;
+&lt;p&gt;这行程安排的，先从昆明杀到丽江，再杀回来&lt;/p&gt;
+&lt;p&gt;所以就有了2次游大理，不过在游大理之前，先去了下 观音峡&lt;/p&gt;
+&lt;p&gt;原本是安排在第1天下午的，因为车程太长，当天坐了近8个小时的大巴&lt;/p&gt;
+&lt;p&gt;直到晚上19点之后才到丽江，所以将观音峡移至今天早晨&lt;/p&gt;
+&lt;p&gt;这里景点一般，最后的峡谷瀑布因为前一天比较累的原因，我并没有上去，而是和另一位同事一起选择了码头边上的一家奶茶店，静静的等其它人回来。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——丽江篇[下]</title>
+    <link href="https://del.pub/post/travel_lijiang2.html"/>
+    <id>https://del.pub/post/travel_lijiang2.html</id>
+    <published>2013-11-25T06:04:00.000Z</published>
+    <updated>2013-11-25T06:04:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>嗯，这次的目的地就是所谓的“艳遇之都”–丽江古城</p><p>我们从黑龙潭公园进入，然后顺着长廊，走进了丽江古城</p><a id="more"></a><h3 id="黑龙潭"><a href="#黑龙潭" class="headerlink" title="黑龙潭"></a>黑龙潭</h3><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/hlt2.jpg" class="full-image lazy" /><h3 id="丽江古城"><a href="#丽江古城" class="headerlink" title="丽江古城"></a>丽江古城</h3><p>这里面有部分原因，没有拍多少，将就吧，也许很多人把这里当做主场，我觉得一般了</p><p>也许是因为我也生在一个“古城”的原因，所以不是很感冒[博主 武威人，请自行查阅度娘百科 武威]</p><p>标志性建筑：</p><p>水车：</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/sc.jpg" class="full-image lazy" /><p>书记提字:</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/sjtz.jpg" class="full-image lazy" /><p>许愿板：</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/xyb.jpg" class="full-image lazy" /><p>下面因为部分原因，包括天气和人的原因，并未拍摄</p><p>但是也许是我老了，依然无法融入这个年轻人的时代罢</p><p>走过酒吧一条街，无论是歌手穿着暴露HIGH翻全场，还是吉它手小清新，均不是我的菜啊</p><p>最终和几个同事在四方街尝了下小吃，</p><p>我们最终的结论是 不难吃，在旅行中得到这个结论不容易的哦，还是可以的，花了不到200块</p><p>还剩了不少…</p><p>所谓“艳遇”，留给高帅富们吧….</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;嗯，这次的目的地就是所谓的“艳遇之都”–丽江古城&lt;/p&gt;
+&lt;p&gt;我们从黑龙潭公园进入，然后顺着长廊，走进了丽江古城&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——丽江篇[上]</title>
+    <link href="https://del.pub/post/travel_lijiang1.html"/>
+    <id>https://del.pub/post/travel_lijiang1.html</id>
+    <published>2013-11-25T01:00:00.000Z</published>
+    <updated>2013-11-25T01:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>说起丽江，也许大家想到最多的应该是“艳遇”</p><p>不过这次我不是冲“艳遇”而去了…</p><p>早上5点多起来，6点吃饭，6点半，天蒙蒙亮，就启程了，早上第1站—玉龙雪山</p><p>嗯，这里被导游坑到了，这个导游是当地的纳西族导游，在纳西族，男的称胖金哥，女的称胖金妹</p><p>这位胖金哥让我们每人买了一罐氧气，100块，昨天晚上在便利店买水的时候看到，店里卖25块，下次去之前，一次自己备一瓶(尽管没有用)</p><p>衣服不用租，上面并没有传说中的那么寒冷….</p><a id="more"></a><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs1.jpg" class="full-image lazy" /><p>嗯，中间乘坐缆车就可以上去了，缆车能到的高度是4506米</p><p>还有100多米需要自己爬上去</p><p>海拔记录</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/4506.jpg" class="full-image lazy" /><p>山顶景色</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs2.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs3.jpg" class="full-image lazy" /><p>嗯，再高的没发现，别人告诉我的时候我都下来了，时间不够了，离顶还差1段路，回头了</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs4.jpg" class="full-image lazy" /><p>然后回头去看刚才所在的平台</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs5.jpg" class="full-image lazy" /><p>下了雪山，紧接着去雪山下边的景观湖 – 蓝月湖</p><p>远看蓝月湖</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/lyh1.jpg" class="full-image lazy" /><p>因为上游水中富含铜离子，所以水变成了蓝色</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/lyh2.jpg" class="full-image lazy" /><p>中游是绿色的</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/lyh3.jpg" class="full-image lazy" /><p>下游变成了白色</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/lyh4.jpg" class="full-image lazy" /><p>浏览完这里，天也亮了，这时雪山好看了起来，补几张雪山的吧</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs6.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs7.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs8.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/ylxs9.jpg" class="full-image lazy" />]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;说起丽江，也许大家想到最多的应该是“艳遇”&lt;/p&gt;
+&lt;p&gt;不过这次我不是冲“艳遇”而去了…&lt;/p&gt;
+&lt;p&gt;早上5点多起来，6点吃饭，6点半，天蒙蒙亮，就启程了，早上第1站—玉龙雪山&lt;/p&gt;
+&lt;p&gt;嗯，这里被导游坑到了，这个导游是当地的纳西族导游，在纳西族，男的称胖金哥，女的称胖金妹&lt;/p&gt;
+&lt;p&gt;这位胖金哥让我们每人买了一罐氧气，100块，昨天晚上在便利店买水的时候看到，店里卖25块，下次去之前，一次自己备一瓶(尽管没有用)&lt;/p&gt;
+&lt;p&gt;衣服不用租，上面并没有传说中的那么寒冷….&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>云南游——大理篇[上]</title>
+    <link href="https://del.pub/post/travel_dali.html"/>
+    <id>https://del.pub/post/travel_dali.html</id>
+    <published>2013-11-24T02:22:00.000Z</published>
+    <updated>2013-11-24T02:22:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为大理不是一天玩的，在最后，还要回一次大理，所以，这一篇，就叫 大理篇(上)</p><p>第1天，大理古城之行[感觉这里不太坑]</p><p>一提起大理，最近印象，就是2个，1.大龙八部，大理国 2.仙剑之南诏国，按导游的话来说就是“苍山之麓，洱海之滨，南诏古国，佛道胜地”，整个大理背靠苍山，面朝洱海，依山傍水，十分秀丽</p><p>我们大巴从昆明出发，坐了N小时车之后，到达大理古城，这里称谓沿用白族，男子称为 阿鹏 ，女子称为 金花。</p><a id="more"></a><p>白族的房子很怪，因为在车上，没拍到，所以，只能一说了，他们房子白墙青砖，上有书画，门楼上会提字，表示自己的姓氏，会写一些与自己有关的</p><p>比如写 “清白传家” 那就说明这家人姓杨，是讲杨震的故事，说起场震，也许很多人说，没听过，但是否听过“天知，地知，你知，我知”这个典故呢？里面的清吏就是杨震</p><p>其余的还有：“琴鹤家声” 是姓赵 ，“明道家风” 是姓程， “青莲遗风” 是姓李…</p><p>门楼上雕有龙凤，如果是凤上龙下，那么就是说家里女主人作主，反之，则是男主人当家作主，现在已经没有了，现在统统是女主人，也就是金花作主，因为在白族，金花是养家种地的，而男子(阿鹏)，是作 “雕民瓢客” 的，“雕民”就是指作雕刻的人了[大理4雕,木，石，银，梅] ，“瓢客”，就是指那些在墙上写字作画的人了…</p><p>另外：金花身上穿戴，叫作风花雪月，记得哦，风，也就是包头上的穗，阿鹏是不可能摸的哦，在以前，摸过了，要是金花同意，需要阿鹏去金花家干3年苦力，而且要睡猪圈，现在呢，摸过了，要给钱，摸一次要200-300块的哦…</p><p>人山人海，没法拍照，随便一张吧(不要吐槽照片哦，我没有单反，家用相机随便拍的)</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/216988002.jpg" class="full-image lazy" /><p>嗯，一路走在古城，感觉还好，只是这里也是处于地震带，房屋有点倒塌</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/3632141117.jpg" class="full-image lazy" /><p>街道2边依然有店家</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/518147456.jpg" class="full-image lazy" /><p><a href="http://baike.baidu.com/view/124482.htm" target="_blank" rel="noopener">杜文秀</a>元帅府</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/517288115.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/4056768598.jpg" class="full-image lazy" /><p><a href="http://baike.baidu.com/link?url=AW5gdiVQFaNbI3sW_3sjYXiUHeLbpNQkx8OrV99yKFU7DTT0JPHHKTWmRFQ0dzS-5mVTpA4P-xSOWxNiansrB_" target="_blank" rel="noopener">蒋公祠</a></p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/2917751598.jpg" class="full-image lazy" /><p>大理古城街道</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/3539740588.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/1944134111.jpg" class="full-image lazy" /><p>洋人街</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/751109724.jpg" class="full-image lazy" /><p>街口砖上2个字，就是如意，据说踩过如意，吉祥如意</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/2385826641.jpg" class="full-image lazy" /><p>手工艺品</p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/3668042605.jpg" class="full-image lazy" /><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/rakiy/blogpic@master/20191019/2178893839.jpg" class="full-image lazy" />]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因为大理不是一天玩的，在最后，还要回一次大理，所以，这一篇，就叫 大理篇(上)&lt;/p&gt;
+&lt;p&gt;第1天，大理古城之行[感觉这里不太坑]&lt;/p&gt;
+&lt;p&gt;一提起大理，最近印象，就是2个，1.大龙八部，大理国 2.仙剑之南诏国，按导游的话来说就是“苍山之麓，洱海之滨，南诏古国，佛道胜地”，整个大理背靠苍山，面朝洱海，依山傍水，十分秀丽&lt;/p&gt;
+&lt;p&gt;我们大巴从昆明出发，坐了N小时车之后，到达大理古城，这里称谓沿用白族，男子称为 阿鹏 ，女子称为 金花。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>哦，出行，云南5日游</title>
+    <link href="https://del.pub/post/travel_yunnan.html"/>
+    <id>https://del.pub/post/travel_yunnan.html</id>
+    <published>2013-11-23T03:56:00.000Z</published>
+    <updated>2013-11-23T03:56:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>公司组织的，行程如下：</p><h3 id="第一天"><a href="#第一天" class="headerlink" title="第一天　"></a>第一天　</h3><p>大理古城[40分钟]   </p><h3 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h3><p>玉龙雪山[120分钟]<br>玉水寨[60分钟]<br>丽江古城[自由活动]   </p><h3 id="第三天"><a href="#第三天" class="headerlink" title="第三天　"></a>第三天　</h3><p>观音峡[60分钟]<br>银都水乡新华村[120分钟]<br>洱海鱼鹰表演[90分钟]   </p><h3 id="第四天"><a href="#第四天" class="headerlink" title="第四天　"></a>第四天　</h3><p>云南民族村[150分钟]<br>七彩云南孔雀园/石林[120分钟]</p><h3 id="第五天"><a href="#第五天" class="headerlink" title="第五天　"></a>第五天　</h3><p>花卉市场(这是要去买东西吧，我猜..)　   </p><h3 id="第六天"><a href="#第六天" class="headerlink" title="第六天"></a>第六天</h3><p>返程…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;公司组织的，行程如下：&lt;/p&gt;
+&lt;h3 id=&quot;第一天&quot;&gt;&lt;a href=&quot;#第一天&quot; class=&quot;headerlink&quot; title=&quot;第一天　&quot;&gt;&lt;/a&gt;第一天　&lt;/h3&gt;&lt;p&gt;大理古城[40分钟]   &lt;/p&gt;
+&lt;h3 id=&quot;第二天&quot;&gt;&lt;a href=&quot;#第二天&quot;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="生活" scheme="https://del.pub/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="旅行" scheme="https://del.pub/tags/%E6%97%85%E8%A1%8C/"/>
+    
+      <category term="云南" scheme="https://del.pub/tags/%E4%BA%91%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Typecho主题Dolphin</title>
+    <link href="https://del.pub/post/Dolphin2.html"/>
+    <id>https://del.pub/post/Dolphin2.html</id>
+    <published>2012-03-02T07:33:00.000Z</published>
+    <updated>2012-03-02T07:33:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>更新说明：</p><blockquote><p>2013-10-23 修正当年写的部分白痴代码，将下载地址换成百度网盘</p></blockquote><p>下载地址：<a href="http://pan.baidu.com/s/1kTyyk" target="_blank">http://pan.baidu.com/s/1kTyyk</a></p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;更新说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2013-10-23 修正当年写的部分白痴代码，将下载地址换成百度网盘&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下载地址：&lt;a href=&quot;http://pan.baidu.com/s/1kTyyk&quot; target=&quot;_blank&quot;&gt;http://pan.baidu.com/s/1kTyyk&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="typecho" scheme="https://del.pub/tags/typecho/"/>
+    
+      <category term="主题" scheme="https://del.pub/tags/%E4%B8%BB%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>改版一小下，新皮肤--简之美</title>
+    <link href="https://del.pub/post/New_Skin_Dolphin.html"/>
+    <id>https://del.pub/post/New_Skin_Dolphin.html</id>
+    <published>2012-02-18T18:36:00.000Z</published>
+    <updated>2012-02-18T18:36:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>呃，从9号上班一直到今天为止，才终于有空呼吸一下新鲜空气(T_T不容易啊……)</p><p>也终于有空将博客改动一下版子了……</p><p>前一阵子一直在用<a href="http://braxiu.net/" target="_blank" title="Braxiu童鞋的网站">braxiu</a>童鞋的Z01，用了好久(作为一个Ubuntu控，重磅推荐啊)，在这里先对他说一声谢谢了，谢谢他漂亮的模板陪我的小站成长……虽然不怎么茁壮</p><a id="more"></a><p>嗯，今天启用新模板，想了很久名字，最后决定叫简之美，英文名字定为<a href="#;">Dolphin</a>中文意思为“海豚”，希望我的新板子如同她的名字一般，能够讨到足够多人的喜爱……</p><p>PS:没有做兼容性测试，目前估计IE9，Chrome，FF应该都OK，IE8以下的估计没效果，再低，估计悲剧……</p><p>嗯，最后嘛，算是我的2012希望，希望我的工作啊，生活啊，都越来越好……</p><p>啊，对了，最后…… 混蛋70，是否可以发布一点关于Typecho的消息呢？？不必新版本，不论什么新功能都OK呃，不能总是没有一丁点儿消息唉……</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;呃，从9号上班一直到今天为止，才终于有空呼吸一下新鲜空气(T_T不容易啊……)&lt;/p&gt;
+&lt;p&gt;也终于有空将博客改动一下版子了……&lt;/p&gt;
+&lt;p&gt;前一阵子一直在用&lt;a href=&quot;http://braxiu.net/&quot; target=&quot;_blank&quot; title=&quot;Braxiu童鞋的网站&quot;&gt;braxiu&lt;/a&gt;童鞋的Z01，用了好久(作为一个Ubuntu控，重磅推荐啊)，在这里先对他说一声谢谢了，谢谢他漂亮的模板陪我的小站成长……虽然不怎么茁壮&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="typecho" scheme="https://del.pub/tags/typecho/"/>
+    
+      <category term="主题" scheme="https://del.pub/tags/%E4%B8%BB%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypechoFeed页源包中包含错误解决方法</title>
+    <link href="https://del.pub/post/Feed_Error.html"/>
+    <id>https://del.pub/post/Feed_Error.html</id>
+    <published>2011-12-01T17:14:00.000Z</published>
+    <updated>2011-12-01T17:14:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>晚上没事，在修整BLOG脚部(可以瞅瞅啦 ^_^)</p><p>在链接RSS的时候，突然发现，Feed打不开了，直接提示下载(= =!)</p><p>然后果断换IE浏览器，提示“源包中包含错误”，再换浏览器，发现端倪，Feed页首出现2行空行！！</p><p>看来这就是问题所在了，可是这2行空行从何而来呢？</p><p>找了一圈，没找到，最后，突然想起来以前在WP的时候遇到同样的问题，修改哪里呢？终于想到，修改functions.php</p><p>把里面的空格去掉就OK！</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;晚上没事，在修整BLOG脚部(可以瞅瞅啦 ^_^)&lt;/p&gt;
+&lt;p&gt;在链接RSS的时候，突然发现，Feed打不开了，直接提示下载(= =!)&lt;/p&gt;
+&lt;p&gt;然后果断换IE浏览器，提示“源包中包含错误”，再换浏览器，发现端倪，Feed页首出现2行空行！！&lt;/p&gt;
+&lt;p&gt;看来这就是问题所在了，可是这2行空行从何而来呢？&lt;/p&gt;
+&lt;p&gt;找了一圈，没找到，最后，突然想起来以前在WP的时候遇到同样的问题，修改哪里呢？终于想到，修改functions.php&lt;/p&gt;
+&lt;p&gt;把里面的空格去掉就OK！&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="折腾" scheme="https://del.pub/tags/%E6%8A%98%E8%85%BE/"/>
+    
+  </entry>
+  
+</feed>

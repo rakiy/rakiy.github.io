@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hexo 4.2.0" />
+  <title>黑苹果/微星B250M-E/10.15/EFI - 旮旯 - 落灰的地方</title>
+  <meta name="keywords" content="黑苹果,微星,B250,OpenCore," />
+  <meta name="description" content="落灰的地方" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+  <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml" />
+  <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.1/pure-min.css"><link rel="stylesheet" href="/css/xoxo.css">
+</head>
+<body>
+  <div class="nav-container"><nav class="home-menu pure-menu pure-menu-horizontal">
+  <a class="pure-menu-heading" href="/">
+    <img class="avatar" src="/images/logo.png">
+    <span class="title">旮旯</span>
+  </a>
+  <ul class="pure-menu-list clearfix">
+    <li class="pure-menu-item"><a href="/" class="pure-menu-link">首页</a></li><li class="pure-menu-item"><a href="/about" class="pure-menu-link">关于</a></li><li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li><li class="pure-menu-item"><a href="/links" class="pure-menu-link">链接</a></li><li class="pure-menu-item"><a href="/tags" class="pure-menu-link">标签</a></li><li class="pure-menu-item"><a href="/works" class="pure-menu-link">作品</a></li>
+  </ul>
+</nav></div>
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner"><div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">黑苹果/微星B250M-E/10.15/EFI</h1>
+      <span><time class="time" datetime="2019-11-27T01:26:59.000Z">2019-11-27</time></span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+        <span class="post-tags"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/B250/" rel="tag">B250</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCore/" rel="tag">OpenCore</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%98%9F/" rel="tag">微星</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" rel="tag">黑苹果</a></li></ul></span>
+      </span>
+      <span class="slash">/</span>
+      <span class="read leancloud_visitors" id="/post/msi_b250_oc_efi.html" data-flag-title="黑苹果/微星B250M-E/10.15/EFI">
+        已读:<span class="leancloud-visitors-count">0</span>
+      </span>
+    </header>
+    <div class="post-content"><p>自己用的黑苹果EFI,会一直更新到这个机器不用了为止吧…</p>
+<p>GITHUB地址: <a href="https://github.com/rakiy/Hackintosh_MSI_B250M_EFI" target="_blank" rel="noopener">https://github.com/rakiy/Hackintosh_MSI_B250M_EFI</a></p>
+<h3 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h3><ol>
+<li>CPU: I5-6500 </li>
+<li>内存：金士顿 DDR4 2400 8g 普条</li>
+<li>显卡：HD530(集显)</li>
+<li>主板：<a href="https://cn.msi.com/Motherboard/B250M-E," target="_blank" rel="noopener" title="官网链接">微星B250M-E</a></li>
+<li>声卡：ALC887(实际上探测为 Realtek ALC888B (0x0887) )，仿冒ID为40</li>
+<li>硬盘: 雷克沙512G SSD M.2 2280(需升级最新版本BIOS才可识别), 西数1T硬盘</li>
+<li>键盘: 达尔优DK100</li>
+<li>鼠标: DELL MS 116 (19块一个的那种)</li>
+<li>网卡：板载 RTL8111H / TP-LINK TL-WN725N V2 </li>
+</ol>
+<a id="more"></a>
+
+<h3 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h3><ol>
+<li>10.15.1 除了快捷键都应该算是OK了</li>
+<li>SSD已内置，网卡也已内置</li>
+<li>4K硬解也已OK</li>
+<li>声卡仿冒成功，基本完美识别，可以识别前后也可以识别显示器的HDMI</li>
+<li>原生电源管理(节能5项)</li>
+<li>USB电源管理</li>
+<li>加入VirtualSMC的CPU温度传感器，istatus显示正常 (2019-11-25)</li>
+</ol>
+<h3 id="系统补丁"><a href="#系统补丁" class="headerlink" title="系统补丁"></a>系统补丁</h3><ol>
+<li>lilu.kext   1.3.9 </li>
+<li>VirtualSMC.kext  1.0.9 </li>
+<li>WhateverGreen.kext 1.3.4</li>
+<li>AppleALC.kext   1.4.3</li>
+<li>RealtekRTL8111.kext  2.2.2</li>
+<li>USBPorts.kext  自己生成</li>
+<li>USBPower.kext  自己生成</li>
+</ol>
+<h3 id="DSDT"><a href="#DSDT" class="headerlink" title="DSDT"></a>DSDT</h3><ol>
+<li>SSDT-no-EC.aml   禁用ECO</li>
+<li>SSDT-PLUG-_PR.CPU0.aml  原生电源管理</li>
+</ol>
+<h3 id="需要自己动手的"><a href="#需要自己动手的" class="headerlink" title="需要自己动手的"></a>需要自己动手的</h3><ol>
+<li>因为原生不支持nvram所以需要工具生成，下载完EFI之后还需要用 LogoutHook来生成nvram，不然无法修改启动项，方法请阅读:<a href="https://blog.xjn819.com/?p=543" target="_blank" rel="noopener">https://blog.xjn819.com/?p=543</a> 3.1 这一节，就2句命令，直接照作即可。</li>
+<li>暂时没有了</li>
+</ol>
+<h3 id="非常重要"><a href="#非常重要" class="headerlink" title="非常重要"></a>非常重要</h3><ol>
+<li>本EFI已经在BIOS关闭了Fast Boot / CFG Lock / VT-d / CSM，请配合食用，<br>（若BIOS里没有CFG LOCK，请升级一下<a href="https://cn.msi.com/Motherboard/support/B250M-E" target="_blank" rel="noopener">https://cn.msi.com/Motherboard/support/B250M-E</a></li>
+</ol>
+<p>**   !!! 刷BIOS有风险，万万不可断电</p>
+<ol start="2">
+<li>如果不想升级BIOS，可以阅读<a href="https://blog.xjn819.com/?p=543" target="_blank" rel="noopener">https://blog.xjn819.com/?p=543</a>此文中第2部分CONFIG.PLIST中红字部分即可解决</li>
+</ol>
+<h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h3><ol>
+<li>HD530的睡眠叫不醒问题！！这个暂时无法解决</li>
+<li>一系列的快捷键神马的，我自己用不到就没有加，请自行添加</li>
+</ol>
+<h3 id="其它说明"><a href="#其它说明" class="headerlink" title="其它说明"></a>其它说明</h3><ol>
+<li>本EFI只适用微星B250M-E，同型号的B250M-F / B250M PRO (包括VHD所有) / B250M NANO 都需要单独仿冒声卡，其它没有什么问题</li>
+<li>因为是6代U，所以仿冒的机型为 IMAC17,1，如果修改该值，请配合修改 仿冒的显卡和声卡ID</li>
+<li>因为在config.plist中设置了交换command和alt,所以呼出OC菜单为 win+r</li>
+<li>其它想好再说</li>
+</ol>
+<h3 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h3><ol>
+<li><a href="https://bbs.pcbeta.com," target="_blank" rel="noopener" title="国内黑苹果基地">远景论坛</a></li>
+<li><a href="https://blog.daliansky.net" target="_blank" rel="noopener">黑果小兵</a></li>
+<li><a href="https://blog.xjn819.com" target="_blank" rel="noopener">XJN</a></li>
+<li><a href="https://github.com/daliansky/OC-little" target="_blank" rel="noopener">宪武</a></li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg" target="_blank" rel="noopener">OPENCORE</a></li>
+</ol>
+</div>
+    <div>全文完。</div>
+  </article>
+  <div class="toc-container">
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#机器配置"><span class="toc-text">机器配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现功能"><span class="toc-text">实现功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统补丁"><span class="toc-text">系统补丁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DSDT"><span class="toc-text">DSDT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要自己动手的"><span class="toc-text">需要自己动手的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非常重要"><span class="toc-text">非常重要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遗留问题"><span class="toc-text">遗留问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它说明"><span class="toc-text">其它说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#鸣谢"><span class="toc-text">鸣谢</span></a></li></ol>
+  </div>
+
+</div>
+</div>
+<div class="copyright">
+  <span>本作品采用</span>
+  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">知识共享署名 4.0 国际许可协议</a>
+  <span>进行许可。 转载时请注明原文链接。</span>
+</div>
+  
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/post/dnsdun.html" rel="next" title="使用DNS盾让BLOG一直在线">
+          使用DNS盾让BLOG一直在线
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+          
+          <a href="/post/tp-wn725v2.html" rel="prev" title="TPLINK WN725N 在黑苹果下的驱动">
+            TPLINK WN725N 在黑苹果下的驱动
+          </a>
+          <span>〉</span>
+        
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  <footer class="footer text-center">
+  <div id="bottom-inner">
+    <a class="bottom-item" href="/" title="回到首页">首页</a> |
+    <a class="bottom-item" href="/atom.xml" title="RSS订阅">RSS</a> |
+    <a class="bottom-item" href="//github.com/rakiy" target="_blank" title="我的github">GitHub</a> |
+    <a class="bottom-item" href="https://hexo.io" target="_blank" title="快速、简洁且高效的博客框架">Powered by hexo 4.2.0</a> |
+    <a class="bottom-item" href="https://github.com/KevinOfNeu/hexo-theme-xoxo" target="_blank" title="好用的主题">Theme xoxo</a> | 
+    <a class="bottom-item" href="https://valine.js.org/" target="_blank" title="基于Leancloud的评论系统">Valine</a>
+  </div>
+</footer>
+  <!-- 配置文件中的JS,按顺序加载 -->
+  <script src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script><script src="/js/xoxo.js"></script>
+  <!--百度统计-->
+  <script>var _hmt = _hmt || []; (function () { var hm = document.createElement("script"); hm.src = "//hm.baidu.com/hm.js?d11fef4e5b804ad994cd5ce91acdc384"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })();</script>
+</body>
+</html>
